@@ -9,7 +9,7 @@ describe(Division) do
   end
 
   describe("#employees") do
-    it("assign employees to division") do
+    it("show employees to division") do
       test_division = Division.create({:department => 'HR'})
       test_employee = Employee.create({:name => "Jim Beam", :division_id => test_division.id()})
       expect(test_division.employees()).to(eq([test_employee]))

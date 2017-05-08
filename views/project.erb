@@ -1,0 +1,43 @@
+<div class="container">
+  <a href="/">Home Page</a>
+  <h5>Project ID: <%= @project.id()%></h5>
+  <h1><%= @project.description() %></h1>
+
+  <a href="/projects/<%= @project.id() %>/edit" role="button" class="btn btn-danger">Edit</a>
+
+
+  <form action="/projects/<%= @project.id() %>" method="post">
+    <input name="_method" type="hidden" value="patch">
+    <div class="form-group">
+      <label for="employee_id">Select a Employee</label>
+      <select id='employee_id' name='employee_id' type='text'>
+      <% @employees.each() do |employee| %>
+        <option value="<%= employee.id()%>"> <%= employee.name() %> </option>
+        <% end %>
+      </select>
+    </div>
+      <button type="submit" class="btn btn-success">Update</button>
+  </form>
+
+  <form action="/projects/remove/<%= @project.id() %>" method="post">
+    <input name="_method" type="hidden" value="patch">
+    <div class="form-group">
+      <label for="employee_id">Select a Employee</label>
+      <select id='employee_id' name='employee_id' type='text'>
+      <% @project.employees().each() do |employee| %>
+        <option value="<%= employee.id()%>"> <%= employee.name() %> </option>
+        <% end %>
+      </select>
+    </div>
+      <button type="submit" class="btn btn-success">Remove</button>
+  </form>
+
+
+  <h3>Employees assigned to the project</h3>
+  <ul>
+    <% @project.employees.each() do |employee| %>
+      <li><a href="/employees/<%= employee.id %>"> <%= employee.name()%></a></li>
+    <% end %>
+  </ul>
+
+</div>

@@ -3,6 +3,7 @@ require('sinatra/reloader')
 require("sinatra/activerecord")
 require('./lib/employee')
 require('./lib/division')
+require('./lib/project')
 also_reload('lib/**/*.rb')
 require("pg")
 
@@ -29,9 +30,18 @@ get('/divisions') do
   erb(:divisions)
 end
 
-#view individual divisions
+#view individual division
 get('/divisions/:id') do
   @division = Division.find(params.fetch('id').to_i())
+  erb(:division)
+end
+
+#add employee to individual division
+post('/division_employees') do
+  name = params.fetch('name')
+  division_id = params.fetch('division_id').to_i
+  new_employee = Employee.create({:name => name, :division_id => division_id})
+  @division = Division.find(division_id)
   erb(:division)
 end
 
@@ -104,4 +114,49 @@ delete('/employees/:id') do
   #a full list of employees to be shown on the employee page is required
   @employees = Employee.all()
   erb(:employees)
+end
+
+#view all projects
+get('/projects') do
+  @projects = Project.all()
+  erb(:projects)
+end
+
+#create a new project
+get('/projects/new') do
+  erb(:project_form)
+end
+
+#add a new project
+post('/projects') do
+  input_description = params.fetch('description')
+  new_project = Project.create({:description => input_description})
+  @projects = Project.all()
+  erb(:projects)
+end
+
+#view individual project
+get('/projects/:id') do
+  @project = Project.find(params.fetch('id').to_i())
+  @employees = Employee.all()
+  erb(:project)
+end
+
+
+patch('/projects/:id') do
+  @project = Project.find(params.fetch('id').to_i())
+  project_id = params.fetch('id').to_i()
+  employee_id = params.fetch('employee_id')
+  Employee.find(employee_id).update({:project_id => project_id})
+  @employees = Employee.all()
+  erb(:project)
+end
+
+patch('/projects/remove/:id') do
+  @project = Project.find(params.fetch('id').to_i())
+  project_id = params.fetch('id').to_i()
+  employee_id = params.fetch('employee_id')
+  Employee.find(employee_id).update({:project_id => nil})
+  @employees = Employee.all()
+  erb(:project)
 end

@@ -3,9 +3,25 @@
   <h5>Division ID: <%= @division.id()%></h5>
   <h1><%= @division.department().upcase() %></h1>
 
-
-
   <a href="/divisions/<%= @division.id() %>/edit" role="button" class="btn btn-danger">Edit</a>
 
+  <!-- Add Employee -->
+
+  <form action="/division_employees" method="post">
+    <h3>Add employee for <%= @division.department().upcase() %></h3>
+    <div class="form-group">
+      <input id="division_id" name="division_id" type="hidden" value="<%= @division.id() %>">
+      <label for="name">Name: </label>
+      <input id="name" name="name" type="text"  class="form-control">
+    </div>
+    <button type="submit" class="btn btn-primary">Add</button>
+  </form>
+
+  <h3>Employees</h3>
+  <ul>
+    <% @division.employees.each() do |employee| %>
+      <li> <a href="/employees/<%= employee.id() %>"><%= employee.name() %></a></li>
+    <% end %>
+  </ul>
 
 </div>

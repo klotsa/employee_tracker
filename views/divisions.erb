@@ -5,7 +5,7 @@
       <h4>All divisions: </h4>
       <ul>
       <% @divisions.each() do |division| %>
-        <li><a href="/divisions/<%= division.id() %>"><%= division.department() %></a></li>
+        <li><a href="/divisions/<%= division.id() %>"> <%= division.department() %></a></li>
       <% end %>
       </ul>
 

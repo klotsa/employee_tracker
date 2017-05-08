@@ -1,0 +1,15 @@
+<div class="container">
+  <p><a href="/">Home page</a></p>
+  <p><a href='/project/new'>Add More Projects</a></p>
+  <% if @projects.any?() %>
+      <h4>All project: </h4>
+      <ul>
+      <% @projects.each() do |project| %>
+        <li><a href="/projects/<%= project.id() %>"> <%= project.description() %></a></li>
+      <% end %>
+      </ul>
+
+  <% else %>
+      <h2>No project added yet!</h2>
+  <% end %>
+</div>
