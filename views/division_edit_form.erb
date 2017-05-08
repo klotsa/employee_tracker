@@ -1,0 +1,20 @@
+<div class="container">
+  <h5>Division ID: <%= @division.id() %></h5>
+  <h5>Department: <%= @division.department() %></h5>
+
+  <form action="/divisions/<%= @division.id() %>" method="post">
+    <input name="_method" type="hidden" value="patch">
+    <div class="form-group">
+      <label for="department"><b>Rename Department: </b></label>
+      <input id="department" name="department" type="text"  class="form-control">
+    </div>
+    <button type="submit" class="btn btn-success">Update</button>
+  </form>
+
+  <form action="/divisions/<%= @division.id() %>" method="post">
+  <input name="_method" type="hidden" value="delete">
+  <button type="submit" class="btn btn-danger mt-3">Delete</button>
+  </div>
+</form>
+
+</div>

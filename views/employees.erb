@@ -1,0 +1,15 @@
+<div class="container">
+  <p><a href="/">Home page</a></p>
+  <p><a href='/employees/new'>Add More Employees</a></p>
+  <% if @employees.any?() %>
+      <h4>All employees: </h4>
+      <ul>
+      <% @employees.each() do |employee| %>
+        <li><a href="/employees/<%= employee.id() %>"><%= employee.name() %></a></li>
+      <% end %>
+      </ul>
+
+  <% else %>
+      <h2>No employees added yet!</h2>
+  <% end %>
+</div>

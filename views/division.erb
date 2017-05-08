@@ -1,0 +1,11 @@
+<div class="container">
+  <a href="/">Home Page</a>
+  <h5>Division ID: <%= @division.id()%></h5>
+  <h1><%= @division.department().upcase() %></h1>
+
+
+
+  <a href="/divisions/<%= @division.id() %>/edit" role="button" class="btn btn-danger">Edit</a>
+
+
+</div>

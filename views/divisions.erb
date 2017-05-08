@@ -1,0 +1,15 @@
+<div class="container">
+  <p><a href="/">Home page</a></p>
+  <p><a href='/divisions/new'>Add More Division</a></p>
+  <% if @divisions.any?() %>
+      <h4>All divisions: </h4>
+      <ul>
+      <% @divisions.each() do |division| %>
+        <li><a href="/divisions/<%= division.id() %>"><%= division.department() %></a></li>
+      <% end %>
+      </ul>
+
+  <% else %>
+      <h2>No divisions added yet!</h2>
+  <% end %>
+</div>
